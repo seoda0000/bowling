@@ -2,21 +2,18 @@ import java.util.ArrayList;
 
 public class Frame {
     private final int number;
-    private int count;
     private final ArrayList<Integer> pins;
+    private int rollCount;
+    private int bonusCount;
     private int totalPins;
-    private Status status; // 0: normal, 1: spare, 2: strike
     private int bonus;
     private boolean isDone;
-    private int bonusCount;
+    private Status status; // 0: normal, 1: spare, 2: strike
 
     public Frame(int number) {
         this.number = number;
-        if (number == 10) {
-            this.pins = new ArrayList<>(3);
-        } else {
-            this.pins = new ArrayList<>(2);
-        }
+        this.rollCount = 2;
+        this.pins = new ArrayList<>();
         this.status = Status.NORMAL;
     }
 
@@ -25,20 +22,23 @@ public class Frame {
         totalPins += pin;
         if (number != 10 && (totalPins > 10 || totalPins < 0))
             throw new IllegalArgumentException("totalPins should be between 0 and 10");
-        count++;
+        rollCount--;
 
         if (totalPins == 10) {
-            if (count == 1) { // strike
+            if (rollCount > 0) { // strike
                 status = Status.STRIKE;
             } else { // spare
                 status = Status.SPARE;
             }
+            if (number == 10) {
+                rollCount++;
+            } else {
+                rollCount = 0;
+            }
             bonusCount = status.getBonusCount();
-            if (number < 10) isDone = true;
-
-        } else {
-            if (number < 10 && count == 2) isDone = true;
         }
+
+        if (rollCount == 0) isDone = true;
     }
 
     public void addBonus(int score) {
@@ -53,5 +53,9 @@ public class Frame {
 
     public boolean isDone() {
         return isDone;
+    }
+
+    public boolean isBegin() {
+        return !pins.isEmpty();
     }
 }

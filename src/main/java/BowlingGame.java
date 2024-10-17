@@ -6,9 +6,9 @@ public class BowlingGame {
     private int turn;
 
     public BowlingGame() {
-        frames = new ArrayList<>(10);
-        for (int i = 1; i <= 10; i++) frames.add(new Frame(i));
         turn = 1;
+        frames = new ArrayList<>();
+        frames.add(new Frame(1));
     }
 
     public void roll(int pins) {
@@ -25,10 +25,14 @@ public class BowlingGame {
             previousFrame.addBonus(pins);
         }
 
-        if (currentFrame.isDone()) turn++;
+        if (currentFrame.isDone()) {
+            turn++;
+            frames.add(new Frame(turn));
+        }
     }
 
     public int score() {
+        if (frames.get(10).isBegin()) throw new IllegalArgumentException("frames size should be less than 10");
         int score = 0;
         for (Frame frame : frames) score += frame.getScore();
         return score;
