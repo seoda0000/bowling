@@ -7,6 +7,7 @@ public class Frame {
     private int totalPins;
     private int status; // 0: normal, 1: spare, 2: strike
     private int score;
+    private boolean isDone;
 
     public Frame(int number) {
         this.number = number;
@@ -17,6 +18,7 @@ public class Frame {
             this.pins = new ArrayList<>(2);
         }
         this.status = 0;
+        this.isDone = false;
     }
 
     public void addCount() {
@@ -40,6 +42,21 @@ public class Frame {
         totalPins += pin;
         if (number != 10 && (totalPins > 10 || totalPins < 0)) throw new IllegalArgumentException("totalPins should be between 0 and 10");
         count++;
+
+        if (totalPins == 10) {
+            if (count == 1) { // strike
+                status = 2;
+            } else { // spare
+                status = 1;
+            }
+            if (number < 10) {
+                isDone = true;
+            }
+        } else {
+            if (number < 10 && count == 2) { // normal
+                isDone = true;
+            }
+        }
     }
 
     public int getStatus() {
@@ -56,5 +73,9 @@ public class Frame {
 
     public void addScore(int score) {
         this.score += score;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 }

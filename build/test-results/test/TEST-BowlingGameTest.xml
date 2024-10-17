@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="BowlingGameTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-10-16T06:46:18" hostname="DESKTOP-2NON767" time="0.049">
+<testsuite name="BowlingGameTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-10-16T07:10:39" hostname="DESKTOP-2NON767" time="0.047">
   <properties/>
-  <testcase name="whenPlayerRollsLessThanZeroPinsAndError()" classname="BowlingGameTest" time="0.017"/>
-  <testcase name="whenPlayerRollsSpareAndGetBonus()" classname="BowlingGameTest" time="0.009"/>
+  <testcase name="whenPlayerRollsLessThanZeroPinsAndError()" classname="BowlingGameTest" time="0.015"/>
+  <testcase name="whenPlayerRollsSpareAndGetBonus()" classname="BowlingGameTest" time="0.01"/>
   <testcase name="whenPlayerRollsMoreThanTenPinsForPlateAndError()" classname="BowlingGameTest" time="0.001"/>
   <testcase name="whenPlayerRollsMoreThanTenPinsAndError()" classname="BowlingGameTest" time="0.001"/>
-  <testcase name="whenPlayerRollsOnePinAndGetOnePoint()" classname="BowlingGameTest" time="0.001"/>
-  <testcase name="whenPlayerRollsStrikeAllAndGetBonus()" classname="BowlingGameTest" time="0.008"/>
+  <testcase name="whenPlayerRollsOnePinAndGetOnePoint()" classname="BowlingGameTest" time="0.002"/>
+  <testcase name="whenPlayerRollsStrikeAllAndGetBonus()" classname="BowlingGameTest" time="0.009"/>
   <testcase name="whenPlayerRollsStrikeAndGetBonus()" classname="BowlingGameTest" time="0.002"/>
-  <testcase name="whenPlayerRollsZeroPinAndGetZeroPoint()" classname="BowlingGameTest" time="0.002"/>
+  <testcase name="whenPlayerRollsZeroPinAndGetZeroPoint()" classname="BowlingGameTest" time="0.001"/>
   <testcase name="whenPlayerRollsLessThanZeroPinsForPlateAndError()" classname="BowlingGameTest" time="0.001"/>
   <system-out><![CDATA[Now:9
 0 0

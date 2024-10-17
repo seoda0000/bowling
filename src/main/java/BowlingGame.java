@@ -43,9 +43,8 @@ public class BowlingGame {
         // plate completed
         if (frames.get(now).getTotalPins() == 10) {
             if (frames.get(now).getCount() == 1) {
-                if (now <= 10) {
-                    frames.get(now).setStatus(2);
-                }
+                frames.get(now).setStatus(2);
+
             } else {
                 frames.get(now).setStatus(1);
             }
@@ -66,7 +65,7 @@ public class BowlingGame {
     public int score() {
         int score = 0;
         int i = 0;
-        System.out.println("Now:" + (now-1));
+        System.out.println("Now:" + (now - 1));
         for (Frame frame : frames) {
             System.out.println(i + " " + frame.getScore());
             score += frame.getScore();
