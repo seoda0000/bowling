@@ -1,8 +1,12 @@
 public enum Status {
     NORMAL(0), SPARE(1), STRIKE(2);
-    private final int code;
+    private final int bonusCount;
 
-    Status(int code) {
-        this.code = code;
+    Status(int bonusCount) {
+        this.bonusCount = bonusCount;
+    }
+
+    int getBonusCount() {
+        return bonusCount;
     }
 }
