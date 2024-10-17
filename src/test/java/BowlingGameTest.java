@@ -114,9 +114,15 @@ class BowlingGameTest {
     }
 
     @Test
-    void whenPlayerRollsMoreThanTwentyOne() {
+    void whenPlayerRollsMoreThanTenFrame() {
         List<Integer> pins = List.of(10, 9, 1, 7, 0, 9, 1, 10, 10, 8, 2, 10, 9, 1, 9, 1, 7, 3);
         for (int pin : pins) game.roll(pin);
+        assertThrowsExactly(IllegalArgumentException.class, () -> game.score());
+    }
+
+    @Test
+    void whenPlayerRollsLessThanTenFrame() {
+        game.roll(10);
         assertThrowsExactly(IllegalArgumentException.class, () -> game.score());
     }
 

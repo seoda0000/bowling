@@ -32,7 +32,8 @@ public class BowlingGame {
     }
 
     public int score() {
-        if (frames.get(10).isBegin()) throw new IllegalArgumentException("frames size should be less than 10");
+        if (frames.size() < 11 || frames.get(10).isBegin() || !frames.get(9).isDone())
+            throw new IllegalArgumentException("frames size should be 10");
         int score = 0;
         for (Frame frame : frames) score += frame.getScore();
         return score;
