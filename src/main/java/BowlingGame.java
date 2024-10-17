@@ -17,25 +17,18 @@ public class BowlingGame {
         Frame currentFrame = frames.get(turn - 1);
         currentFrame.roll(pins);
 
-        Frame previousFrame;
-
         // bonus
         for (int pastTurn = turn - 1; pastTurn > 0 && turn - pastTurn <= 2; pastTurn--) {
-            previousFrame = frames.get(pastTurn - 1);
-            previousFrame.addBonus(pins);
+            frames.get(pastTurn - 1).addBonus(pins);
         }
 
-        if (currentFrame.isDone()) {
-            turn++;
-            frames.add(new Frame(turn));
-        }
+        if (currentFrame.isDone()) frames.add(new Frame(++turn));
+
     }
 
     public int score() {
         if (frames.size() < 11 || frames.get(10).isBegin() || !frames.get(9).isDone())
             throw new IllegalArgumentException("frames size should be 10");
-        int score = 0;
-        for (Frame frame : frames) score += frame.getScore();
-        return score;
+        return frames.stream().mapToInt(Frame::getScore).sum();
     }
 }

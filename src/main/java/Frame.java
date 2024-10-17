@@ -7,13 +7,12 @@ public class Frame {
     private int bonusCount;
     private int totalPins;
     private int bonus;
-    private boolean isDone;
-    private Status status; // 0: normal, 1: spare, 2: strike
+    private Status status;
 
     public Frame(int number) {
         this.number = number;
-        this.rollCount = 2;
         this.pins = new ArrayList<>();
+        this.rollCount = 2;
         this.status = Status.NORMAL;
     }
 
@@ -25,20 +24,15 @@ public class Frame {
         rollCount--;
 
         if (totalPins == 10) {
-            if (rollCount > 0) { // strike
-                status = Status.STRIKE;
-            } else { // spare
-                status = Status.SPARE;
-            }
-            if (number == 10) {
-                rollCount++;
-            } else {
-                rollCount = 0;
-            }
-            bonusCount = status.getBonusCount();
-        }
+            // strike or spare
+            if (rollCount > 0) status = Status.STRIKE;
+            else status = Status.SPARE;
 
-        if (rollCount == 0) isDone = true;
+            bonusCount = status.getBonusCount();
+
+            if (number == 10) rollCount++;
+            else rollCount = 0;
+        }
     }
 
     public void addBonus(int score) {
@@ -52,7 +46,7 @@ public class Frame {
     }
 
     public boolean isDone() {
-        return isDone;
+        return rollCount == 0;
     }
 
     public boolean isBegin() {
