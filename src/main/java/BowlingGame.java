@@ -25,7 +25,7 @@ public class BowlingGame {
         }
 
         // spare
-        if (now > 0 && frames.get(now - 1).getStatus() == 1) {
+        if (now > 0 && frames.get(now - 1).getStatus() == Status.SPARE) {
             frames.get(now - 1).addScore(pins);
         }
 
@@ -33,7 +33,7 @@ public class BowlingGame {
         // strike
         if (now > 0) {
             for (int frame = now - 1; frame >= now - 2 && frame >= 0; frame--) {
-                if (frames.get(frame).getStatus() == 2) {
+                if (frames.get(frame).getStatus() == Status.STRIKE) {
                     frames.get(frame).addScore(pins);
                 }
             }
@@ -43,10 +43,10 @@ public class BowlingGame {
         // plate completed
         if (frames.get(now).getTotalPins() == 10) {
             if (frames.get(now).getCount() == 1) {
-                frames.get(now).setStatus(2);
+                frames.get(now).setStatus(Status.STRIKE);
 
             } else {
-                frames.get(now).setStatus(1);
+                frames.get(now).setStatus(Status.SPARE);
             }
 
             if (now < 10) {

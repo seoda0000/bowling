@@ -5,7 +5,7 @@ public class Frame {
     private int count;
     private ArrayList<Integer> pins;
     private int totalPins;
-    private int status; // 0: normal, 1: spare, 2: strike
+    private Status status; // 0: normal, 1: spare, 2: strike
     private int score;
     private boolean isDone;
 
@@ -17,7 +17,7 @@ public class Frame {
         } else {
             this.pins = new ArrayList<>(2);
         }
-        this.status = 0;
+        this.status = Status.NORMAL;
         this.isDone = false;
     }
 
@@ -45,9 +45,9 @@ public class Frame {
 
         if (totalPins == 10) {
             if (count == 1) { // strike
-                status = 2;
+                status = Status.STRIKE;
             } else { // spare
-                status = 1;
+                status = Status.SPARE;
             }
             if (number < 10) {
                 isDone = true;
@@ -59,11 +59,11 @@ public class Frame {
         }
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
