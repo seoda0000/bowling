@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BowlingGameTest {
@@ -102,6 +104,13 @@ class BowlingGameTest {
         game.roll(0);
 
         assertEquals(13, game.score());
+    }
+
+    @Test
+    void whenPlayerRollsExample() {
+        List<Integer> pins = List.of(10, 9, 1, 7, 0, 9, 1, 10, 10, 8, 2, 10, 9, 1, 9, 1, 7);
+        for (int pin : pins) game.roll(pin);
+        assertEquals(188, game.score());
     }
 
 }
