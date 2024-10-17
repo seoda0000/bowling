@@ -86,10 +86,22 @@ class BowlingGameTest {
     void whenPlayerRollsStrikeAllAndGetBonus() {
         for (int i = 0; i < 12; i++) {
             game.roll(10);
-            System.out.println(game.score());
         }
 
         assertEquals(300, game.score());
+    }
+
+    @Test
+    void whenPlayerRollsMoreThanTenPointsAtTenFrame() {
+        for (int i = 0; i < 9; i++) {
+            game.roll(0);
+            game.roll(0);
+        }
+        game.roll(10);
+        game.roll(3);
+        game.roll(0);
+
+        assertEquals(13, game.score());
     }
 
 }
