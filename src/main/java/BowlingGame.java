@@ -6,9 +6,9 @@ public class BowlingGame {
     private int turn;
 
     public BowlingGame() {
-        frames = new ArrayList<>(10);
-        for (int i = 1; i <= 10; i++) frames.add(new Frame(i));
         turn = 1;
+        frames = new ArrayList<>();
+        frames.add(new Frame(1));
     }
 
     public void roll(int pins) {
@@ -17,20 +17,18 @@ public class BowlingGame {
         Frame currentFrame = frames.get(turn - 1);
         currentFrame.roll(pins);
 
-        Frame previousFrame;
-
         // bonus
         for (int pastTurn = turn - 1; pastTurn > 0 && turn - pastTurn <= 2; pastTurn--) {
-            previousFrame = frames.get(pastTurn - 1);
-            previousFrame.addBonus(pins);
+            frames.get(pastTurn - 1).addBonus(pins);
         }
 
-        if (currentFrame.isDone()) turn++;
+        if (currentFrame.isDone()) frames.add(new Frame(++turn));
+
     }
 
     public int score() {
-        int score = 0;
-        for (Frame frame : frames) score += frame.getScore();
-        return score;
+        if (frames.size() < 11 || frames.get(10).isBegin() || !frames.get(9).isDone())
+            throw new IllegalArgumentException("frames size should be 10");
+        return frames.stream().mapToInt(Frame::getScore).sum();
     }
 }
